@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        threadViewModel.onDestroy()
         rxViewModel.onDestroy()
         super.onDestroy()
     }
