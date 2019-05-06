@@ -1,27 +1,24 @@
 package com.github.eunsiljo.coroutine.rx
 
-import androidx.lifecycle.MutableLiveData
+import com.github.eunsiljo.coroutine.BaseViewModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class RxViewModel {
-    private val compositeDisposable by lazy { CompositeDisposable() }
+class RxViewModel : BaseViewModel() {
 
-    val resultState by lazy { MutableLiveData<String>() }
-    val loadingState by lazy { MutableLiveData<Boolean>() }
-    val errorState by lazy { MutableLiveData<Throwable>() }
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     fun getRxResult(sleepMillis: Long) {
         Single.create(SleepOnSubscribe(sleepMillis))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { loadingState.value = true }
-            .doFinally { loadingState.value = false }
+            .doOnSubscribe { setLoadingValue(true) }
+            .doFinally { setLoadingValue(false) }
             .subscribe(
-                { result -> resultState.value = result },
-                { throwable -> errorState.value = throwable }
+                { result -> setResultValue(result) },
+                { throwable -> setErrorValue(throwable) }
             )
             .also { compositeDisposable.add(it) }
     }
