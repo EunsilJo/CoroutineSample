@@ -12,19 +12,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Let's parsing"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/progress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progress"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0.5"/>
 
     <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/button"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button"
             app:layout_constraintVertical_chainStyle="packed"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
