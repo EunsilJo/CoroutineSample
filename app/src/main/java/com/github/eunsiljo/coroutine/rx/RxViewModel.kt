@@ -23,7 +23,8 @@ class RxViewModel : BaseViewModel() {
             .also { compositeDisposable.add(it) }
     }
 
-    fun onDestroy() {
+    override fun onCleared() {
+        super.onCleared()
         compositeDisposable.dispose()
     }
 }

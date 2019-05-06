@@ -1,23 +1,29 @@
 package com.github.eunsiljo.coroutine
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-open class BaseViewModel {
-    private val resultState: MutableLiveData<String> = MutableLiveData()
-    private val loadingState: MutableLiveData<Boolean> = MutableLiveData()
-    private val errorState: MutableLiveData<Throwable?> = MutableLiveData()
+open class BaseViewModel : ViewModel() {
+
+    private val _resultState: MutableLiveData<String> = MutableLiveData()
+    private val _loadingState: MutableLiveData<Boolean> = MutableLiveData()
+    private val _errorState: MutableLiveData<Throwable?> = MutableLiveData()
+
+    val resultState: LiveData<String>
+        get() = _resultState
+    val loadingState: LiveData<Boolean>
+        get() = _loadingState
+    val errorState: LiveData<Throwable?>
+        get() = _errorState
 
     protected fun setResultValue(value: String) {
-        resultState.value = value
+        _resultState.value = value
     }
     protected fun setLoadingValue(value: Boolean) {
-        loadingState.value = value
+        _loadingState.value = value
     }
     protected fun setErrorValue(value: Throwable?) {
-        errorState.value = value
+        _errorState.value = value
     }
-
-    fun getResultState() = resultState
-    fun getLoadingState() = loadingState
-    fun getErrorState() = errorState
 }
