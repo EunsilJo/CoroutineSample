@@ -15,16 +15,18 @@ class CoroutineViewModel : BaseViewModel() {
             setLoadingValue(true)
 
             try {
-                withContext(Dispatchers.IO) {
-                    Thread.sleep(sleepMillis)
-                }
-
-                setResultValue(COROUTINE_RESULT)
+                setResultValue(sleep(sleepMillis).await())
             } catch (exception: Exception) {
                 setErrorValue(exception)
             } finally {
                 setLoadingValue(false)
             }
+        }
+
+    private suspend fun sleep(sleepMillis: Long): Deferred<String> =
+        CoroutineScope(Dispatchers.IO).async {
+            Thread.sleep(sleepMillis)
+            COROUTINE_RESULT
         }
 
     override fun onCleared() {

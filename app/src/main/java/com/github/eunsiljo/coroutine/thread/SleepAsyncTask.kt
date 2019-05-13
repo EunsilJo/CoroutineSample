@@ -9,7 +9,9 @@ class SleepAsyncTask(
     private val viewModelReference: WeakReference<BaseViewModel>
 ) : AsyncTask<Long, Boolean, Pair<String, Throwable?>>() {
 
-    private val ASYNC_TASK_RESULT = "ASYNC TASK RESULT!"
+    companion object {
+        private const val ASYNC_TASK_RESULT = "ASYNC TASK RESULT!"
+    }
 
     override fun onPreExecute() {
         super.onPreExecute()
