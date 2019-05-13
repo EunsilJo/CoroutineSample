@@ -55,6 +55,7 @@ class ThreadViewModel : BaseViewModel() {
         private val ASYNC_TASK_RESULT = "ASYNC TASK RESULT!"
 
         override fun onPreExecute() {
+            super.onPreExecute()
             setLoadingValue(true)
         }
 
@@ -67,6 +68,7 @@ class ThreadViewModel : BaseViewModel() {
             }
 
         override fun onPostExecute(result: Pair<String, Throwable?>?) {
+            super.onPostExecute(result)
             setLoadingValue(false)
             result?.run {
                 val (value, throwable) = this

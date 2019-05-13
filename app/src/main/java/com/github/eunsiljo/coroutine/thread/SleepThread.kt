@@ -9,6 +9,7 @@ class SleepThread(private val sleepMillis: Long, private val handler: Handler) :
     }
 
     override fun run() {
+        super.run()
         handler.run {
             sendMessage(obtainMessage(SleepMessage.PROGRESS.what, true))
         }
