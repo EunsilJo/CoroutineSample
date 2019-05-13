@@ -9,12 +9,11 @@ class SleepThread(private val sleepMillis: Long, private val handler: Handler) :
     }
 
     override fun run() {
-        super.run()
-        try {
-            handler.run {
-                sendMessage(obtainMessage(SleepMessage.PROGRESS.what, true))
-            }
+        handler.run {
+            sendMessage(obtainMessage(SleepMessage.PROGRESS.what, true))
+        }
 
+        try {
             sleep(sleepMillis)
 
             handler.run {
@@ -23,6 +22,7 @@ class SleepThread(private val sleepMillis: Long, private val handler: Handler) :
             }
         } catch (exception: Exception) {
             handler.run {
+                sendMessage(obtainMessage(SleepMessage.PROGRESS.what, false))
                 sendMessage(obtainMessage(SleepMessage.ERROR.what, exception))
             }
         }

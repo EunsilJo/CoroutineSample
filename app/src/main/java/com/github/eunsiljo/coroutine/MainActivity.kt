@@ -41,8 +41,9 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             //threadViewModel.getThreadResult(SLEEP_MILLIS)
+            threadViewModel.getThreadResultWithAsyncTask(SLEEP_MILLIS)
             //rxViewModel.getRxResult(SLEEP_MILLIS)
-            coroutineViewModel.getCoroutineResult(SLEEP_MILLIS)
+            //coroutineViewModel.getCoroutineResult(SLEEP_MILLIS)
         }
     }
 

@@ -15,9 +15,9 @@ class CoroutineViewModel : BaseViewModel() {
 
     fun getCoroutineResult(sleepMillis: Long) {
         coroutineScope.launch {
-            try {
-                setLoadingValue(true)
+            setLoadingValue(true)
 
+            try {
                 CoroutineScope(Dispatchers.IO).launch {
                     Thread.sleep(sleepMillis)
 
@@ -27,6 +27,7 @@ class CoroutineViewModel : BaseViewModel() {
                     }
                 }
             } catch (exception: Exception) {
+                setLoadingValue(false)
                 setErrorValue(exception)
             }
         }
