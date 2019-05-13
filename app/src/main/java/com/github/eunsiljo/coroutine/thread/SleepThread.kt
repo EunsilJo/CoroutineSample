@@ -22,13 +22,15 @@ class SleepThread(
             sleep(sleepMillis)
 
             handler.run {
-                sendMessage(obtainMessage(SleepMessage.PROGRESS.what, false))
                 sendMessage(obtainMessage(SleepMessage.RESULT.what, THREAD_RESULT))
             }
         } catch (exception: Exception) {
             handler.run {
-                sendMessage(obtainMessage(SleepMessage.PROGRESS.what, false))
                 sendMessage(obtainMessage(SleepMessage.ERROR.what, exception))
+            }
+        } finally {
+            handler.run {
+                sendMessage(obtainMessage(SleepMessage.PROGRESS.what, false))
             }
         }
     }

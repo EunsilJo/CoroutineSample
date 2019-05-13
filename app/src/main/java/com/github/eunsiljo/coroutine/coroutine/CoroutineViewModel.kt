@@ -17,18 +17,22 @@ class CoroutineViewModel : BaseViewModel() {
         coroutineScope.launch {
             setLoadingValue(true)
 
-            try {
-                CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
                     Thread.sleep(sleepMillis)
 
                     CoroutineScope(Dispatchers.Main).launch {
-                        setLoadingValue(false)
                         setResultValue(COROUTINE_RESULT)
                     }
+                } catch (exception: Exception) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        setErrorValue(exception)
+                    }
+                } finally {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        setLoadingValue(false)
+                    }
                 }
-            } catch (exception: Exception) {
-                setLoadingValue(false)
-                setErrorValue(exception)
             }
         }
     }
