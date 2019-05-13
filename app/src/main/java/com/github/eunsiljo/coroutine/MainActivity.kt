@@ -39,12 +39,10 @@ class MainActivity : AppCompatActivity() {
         subscribeViewModel(rxViewModel)
         subscribeViewModel(coroutineViewModel)
 
-        button.setOnClickListener {
-            //threadViewModel.getThreadResult(SLEEP_MILLIS)
-            threadViewModel.getThreadResultWithAsyncTask(SLEEP_MILLIS)
-            //rxViewModel.getRxResult(SLEEP_MILLIS)
-            //coroutineViewModel.getCoroutineResult(SLEEP_MILLIS)
-        }
+        btn_thread.setOnClickListener { threadViewModel.getThreadResult(SLEEP_MILLIS) }
+        btn_asynctask.setOnClickListener { threadViewModel.getThreadResultWithAsyncTask(SLEEP_MILLIS) }
+        btn_rx.setOnClickListener { rxViewModel.getRxResult(SLEEP_MILLIS) }
+        btn_coroutine.setOnClickListener { coroutineViewModel.getCoroutineResult(SLEEP_MILLIS) }
     }
 
     private fun subscribeViewModel(viewModel: BaseViewModel) {

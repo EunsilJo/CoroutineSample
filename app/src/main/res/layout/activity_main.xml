@@ -8,16 +8,48 @@
         tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button"
+            android:id="@+id/btn_thread"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Let's parsing"
-            app:layout_constraintBottom_toTopOf="@id/progress"
+            android:minWidth="120dp"
+            android:text="thread"
+            app:layout_constraintBottom_toTopOf="@id/btn_asynctask"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintVertical_bias="0.5"/>
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_asynctask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="asynctask"
+            app:layout_constraintBottom_toTopOf="@id/btn_rx"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_thread"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_rx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="rx"
+            app:layout_constraintBottom_toTopOf="@id/btn_coroutine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_asynctask"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_coroutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="120dp"
+            android:text="coroutine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_rx"/>
 
     <ProgressBar
             android:id="@+id/progress"
@@ -28,6 +60,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
