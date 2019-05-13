@@ -18,14 +18,13 @@ class ThreadViewModel : BaseViewModel() {
         ).also { threadPool.execute(it) }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        threadPool.shutdown()
-    }
-
-
     fun getThreadResultWithAsyncTask(sleepMillis: Long) {
         SleepAsyncTask(WeakReference(this@ThreadViewModel))
             .executeOnExecutor(threadPool, sleepMillis)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        threadPool.shutdown()
     }
 }
