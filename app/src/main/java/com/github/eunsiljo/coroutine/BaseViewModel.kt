@@ -17,13 +17,13 @@ open class BaseViewModel : ViewModel() {
     val errorState: LiveData<Throwable?>
         get() = _errorState
 
-    protected fun setResultValue(value: String) {
+    fun setResultValue(value: String) {
         _resultState.value = value
     }
-    protected fun setLoadingValue(value: Boolean) {
+    fun setLoadingValue(value: Boolean) {
         _loadingState.value = value
     }
-    protected fun setErrorValue(value: Throwable?) {
+    fun setErrorValue(value: Throwable?) {
         _errorState.value = value
     }
 }

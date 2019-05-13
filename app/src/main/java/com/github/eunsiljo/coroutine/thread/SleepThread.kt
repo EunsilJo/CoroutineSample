@@ -3,7 +3,11 @@ package com.github.eunsiljo.coroutine.thread
 import android.os.Handler
 import java.lang.Exception
 
-class SleepThread(private val sleepMillis: Long, private val handler: Handler) : Thread() {
+class SleepThread(
+    private val sleepMillis: Long,
+    private val handler: Handler
+) : Thread() {
+
     companion object {
         private const val THREAD_RESULT = "THREAD RESULT!"
     }
