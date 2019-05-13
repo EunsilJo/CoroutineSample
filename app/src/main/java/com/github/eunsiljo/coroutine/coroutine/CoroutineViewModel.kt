@@ -15,9 +15,9 @@ class CoroutineViewModel : BaseViewModel() {
             setLoadingValue(true)
 
             try {
-                CoroutineScope(Dispatchers.IO).async {
+                withContext(Dispatchers.IO) {
                     Thread.sleep(sleepMillis)
-                }.await()
+                }
 
                 setResultValue(COROUTINE_RESULT)
             } catch (exception: Exception) {
