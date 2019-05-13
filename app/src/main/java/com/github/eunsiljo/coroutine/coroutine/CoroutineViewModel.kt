@@ -1,10 +1,7 @@
 package com.github.eunsiljo.coroutine.coroutine
 
 import com.github.eunsiljo.coroutine.BaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class CoroutineViewModel : BaseViewModel() {
     companion object {
@@ -13,29 +10,22 @@ class CoroutineViewModel : BaseViewModel() {
 
     private val coroutineScope by lazy { CoroutineScope(Dispatchers.Main) }
 
-    fun getCoroutineResult(sleepMillis: Long) {
+    fun getCoroutineResult(sleepMillis: Long) =
         coroutineScope.launch {
             setLoadingValue(true)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
+            try {
+                CoroutineScope(Dispatchers.IO).async {
                     Thread.sleep(sleepMillis)
+                }.await()
 
-                    CoroutineScope(Dispatchers.Main).launch {
-                        setResultValue(COROUTINE_RESULT)
-                    }
-                } catch (exception: Exception) {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        setErrorValue(exception)
-                    }
-                } finally {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        setLoadingValue(false)
-                    }
-                }
+                setResultValue(COROUTINE_RESULT)
+            } catch (exception: Exception) {
+                setErrorValue(exception)
+            } finally {
+                setLoadingValue(false)
             }
         }
-    }
 
     override fun onCleared() {
         super.onCleared()
